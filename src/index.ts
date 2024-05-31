@@ -1,12 +1,20 @@
 import express from 'express';
-import config from './config';
+import config from './config/index';
+import connectDB from './db/conn';
 
-const app = express();
+async function main() {
+    try {
+        await connectDB();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+        const app = express();
 
-app.listen(config.port, () => {
-  console.log(`Server is running on http://localhost:${config.port}`);
-});
+        app.listen(config.PORT, () => {
+            console.log(`Server is running on http://localhost:${config.PORT}`);
+        });
+
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+    }
+}
+
+main();
