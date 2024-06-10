@@ -11,7 +11,7 @@ import path from 'path';
 async function main() {
     try {
         // ! issue with this line
-        // await connectDB(); 
+        await connectDB(); 
 
         const app = express();
         const server = http.createServer(app);
@@ -25,7 +25,7 @@ async function main() {
 
         const io = new SocketIOServer(server,{
             cors:{
-                origin: 'http://localhost:5173',
+                origin: '*',
                 methods: ['GET', 'POST'],
                 credentials: true
             }

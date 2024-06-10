@@ -9,9 +9,16 @@ export default function initializeSocket(io: Server) {
   io.on('connection', (socket: Socket) => {
     console.log('Client connected',socket.id);
 
-    socket.on('message', (message: Message) => {
+    socket.on('message', (message: Message,conversationId) => {
       console.log('Received message:', message);
-      io.emit('receive-message', message);
+      io.emit('receive-message', {
+        author: {
+          firstName: 'Server',
+          type: 'bot',
+        },
+        content: `Message BOT`,
+        type: 'text',
+      });
     });
 
     // socket.emit('message', { from: 'Server', text: `Welcome to the chat ${socket.id}` });
