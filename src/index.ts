@@ -7,6 +7,7 @@ import config from './config/index';
 import connectDB from './db/conn';
 import initializeSocket from './services/socket';
 import path from 'path';
+import ApiRoutes from "./routes/index";
 
 async function main() {
     try {
@@ -21,7 +22,8 @@ async function main() {
         app.use(cors({
             origin: '*',
         }));
-        app.use(express.static(path.join(__dirname,'..', 'dist')));
+
+        app.use('/api',ApiRoutes);
 
         const io = new SocketIOServer(server,{
             cors:{

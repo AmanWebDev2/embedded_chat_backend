@@ -1,23 +1,34 @@
 import mongoose from "mongoose";
 
-const conversationSchema = new mongoose.Schema({
-    conversationId: {
+const messageSchema = new mongoose.Schema({
+    author: {
+      firstName: {
         type: String,
-        required: true,
+        // required: true
+      },
+      type: {
+        type: String,
+        // required: true
+      }
+    },
+    content: {
+      type: String,
+    //   required: true
+    },
+    type: {
+      type: String,
+    //   required: true
+    }
+  });
+  
+
+const conversationSchema = new mongoose.Schema({
+    conversationId:{
+        type: String,
+        ref: "Conversation",
     },
     messages: [
-        {
-            author: {
-                firstName: String,
-                type: String,
-            },
-            content: {
-                type: String,
-            },
-            type: {
-                type: String,
-            },
-        },
+        messageSchema
     ]
 }, { timestamps: true });
 

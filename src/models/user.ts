@@ -14,12 +14,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  conversations: [
-    {
+  conversationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Conversation",
-    },
-  ]
+  },
+
 }, { timestamps: true });
 
 userSchema.pre("save", async function (next) {
